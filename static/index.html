@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VisitorAI | Yapay Zekâ Destekli Kullanıcı İçgörüsü</title>
+  <meta name="description" content="Ollama ve FastAPI ile çalışan yapay zekâ destekli kullanıcı ihtiyaç analizi demosu.">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="badge">LOCAL AI • FASTAPI • OLLAMA</div>
+      <h1>Ziyaretçiyi değil,<br><span>ihtiyacını anlayan</span> web deneyimi.</h1>
+      <p>
+        Birkaç kısa cevabı yerel yapay zekâ ile analiz ederek
+        kullanım alanlarını ve kişiselleştirilmiş önerileri çıkarır.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="card-title">
+          <span class="step">01</span>
+          <div>
+            <h2>Seni tanıyalım</h2>
+            <p>Kişisel veri değil, yalnızca kullanım ihtiyacını soruyoruz.</p>
+          </div>
+        </div>
+
+        <form id="analysisForm">
+          <label>
+            Çalıştığın alan / meslek
+            <input id="profession" type="text" placeholder="Örn. Operasyon, yazılım, satış..." required maxlength="100">
+          </label>
+
+          <label>
+            Yapay zekâyı en çok ne için kullanıyorsun?
+            <select id="aiUsage" required>
+              <option value="" selected disabled>Seç</option>
+              <option>İş süreçleri ve otomasyon</option>
+              <option>İçerik üretimi</option>
+              <option>Veri analizi ve raporlama</option>
+              <option>Yazılım geliştirme</option>
+              <option>Araştırma ve öğrenme</option>
+              <option>Henüz aktif kullanmıyorum</option>
+            </select>
+          </label>
+
+          <label>
+            Teknik seviyen
+            <div class="level-row">
+              <input id="technicalLevel" type="range" min="1" max="5" value="3">
+              <strong id="levelValue">3 / 5</strong>
+            </div>
+          </label>
+
+          <label>
+            Yapay zekâdan en büyük beklentin nedir?
+            <textarea id="expectation" placeholder="Örn. Raporlama süresini azaltmak ve tekrar eden işleri otomatikleştirmek." required maxlength="1000"></textarea>
+          </label>
+
+          <button id="submitButton" type="submit">
+            <span>AI ile analiz et</span>
+            <span class="arrow">→</span>
+          </button>
+
+          <div id="status" class="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div class="card result-card">
+        <div class="card-title">
+          <span class="step">02</span>
+          <div>
+            <h2>AI içgörüsü</h2>
+            <p>Analiz sonucu burada oluşacak.</p>
+          </div>
+        </div>
+
+        <div id="emptyState" class="empty">
+          <div class="orb"></div>
+          <p>Formu doldurduğunda yerel model, cevaplarını analiz ederek sana özel bir kullanım haritası çıkaracak.</p>
+        </div>
+
+        <div id="result" class="result hidden">
+          <div class="result-item">
+            <span>PROFİL</span>
+            <h3 id="profile"></h3>
+          </div>
+          <div class="result-pair">
+            <div class="result-item">
+              <span>AI SEVİYESİ</span>
+              <h3 id="aiLevel"></h3>
+            </div>
+            <div class="result-item">
+              <span>ÖNCELİKLİ İHTİYAÇ</span>
+              <h3 id="priorityNeed"></h3>
+            </div>
+          </div>
+          <div class="result-item">
+            <span>UYGUN KULLANIM ALANLARI</span>
+            <div id="useCases" class="chips"></div>
+          </div>
+          <div class="recommendation">
+            <span>ÖNERİ</span>
+            <p id="recommendation"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>VisitorAI</span>
+      <span>Analiz yerel Ollama modeli ile gerçekleştirilir.</span>
+    </footer>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
